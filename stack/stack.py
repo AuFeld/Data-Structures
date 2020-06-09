@@ -10,16 +10,53 @@ return elements in Last In First Out order.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?
 """
+
+import sys
+sys.path.append('/home/chase/repos/Data-Structures/singly_linked_list')
+from singly_linked_list import LinkedList
+
+'''
 class Stack:
     def __init__(self):
         self.size = 0
         # self.storage = ?
+        self.storage = []
 
     def __len__(self):
-        pass
+        return self.size
 
     def push(self, value):
-        pass
+        self.storage.append(value)
+        self.size += 1
 
     def pop(self):
-        pass
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.pop(-1)
+        return None
+'''
+
+class Stack:
+    def __init__(self):
+        self.size = 0
+        self.storage = LinkedList()
+    
+    def __len__(self):
+        return self.size 
+    
+    def push(self, value):
+        self.storage.add_to_tail(value)
+        self.size += 1
+    
+    def pop(self):
+        if self.size > 0:
+            self.size -= 1
+        return self.storage.remove_tail()
+
+
+'''
+Difference between using an array vs a linked list when implementing a Stack?
+
+An advantage of linked-lists is that when pushing a new element, the underlying storage doesn't need to rellocate self.size +1 in 
+memory to make the updated storage array
+'''
